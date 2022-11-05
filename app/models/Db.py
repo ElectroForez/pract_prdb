@@ -10,5 +10,9 @@ class Db:
             password='qwerty',
             host='localhost'
         )
+        self.connection.autocommit = True
         self.cursor = self.connection.cursor(cursor_factory=RealDictCursor)
+        self.simple_cursor = self.connection.cursor()
         print('successful connect to db')
+
+db = Db()

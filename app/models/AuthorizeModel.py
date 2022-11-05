@@ -1,7 +1,9 @@
+import datetime
+
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 
 from models.User import UserModel
-
+from models.Db import db
 
 class AuthorizeModel(QObject):
 
@@ -13,14 +15,27 @@ class AuthorizeModel(QObject):
         self._cur_user = None
 
     @property
-    def users(self):
-        return self._user_model.get_users()
+    def cur_user(self):
+        return self._cur_user
 
-    def check_authorize(self, login, password):
+    @cur_user.setter
+    def cur_user(self, value):
+        return self._cur_user
+
+    def verify_credentials(self, login, password):
         candidate = self._user_model.get_user(login, password)
+        input_type = 'успешно' if candidate else 'не успешно'
+        time = datetime.datetime.now()
+        self.add_to_history(login, input_type, time)
+        return candidate
 
-        if candidate:
-            self.user_authorized.emit(True)
-        else:
-            self.user_authorized.emit(False)
-
+    def add_to_history(self, login, input_type, time):
+        db.simple_cursor.execute(f'INSERT INTO история_входа '
+                         f'(логин, тип_входа, время_входа) '
+                         f'VALUES (%s, %s, %s)',
+                         (
+                             login,
+                             input_type,
+                             time
+                         ))
+        print('Добавлено в историю')

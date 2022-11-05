@@ -1,15 +1,17 @@
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QMainWindow, QLineEdit, QCheckBox
+from PyQt5.QtWidgets import QMainWindow, QLineEdit, QMessageBox
 from views.authorizeDesign import Ui_MainWindow
+
+from controllers.AuthorizeController import AuthorizeController
 
 
 class AuthorizeView(QMainWindow):
 
-    def __init__(self, model, controller):
+    def __init__(self, model):
         super().__init__()
 
-        self._controller = controller
         self._model = model
+        self._controller = AuthorizeController(self, self._model)
         self._ui = Ui_MainWindow()
 
         self._ui.setupUi(self)
@@ -22,12 +24,19 @@ class AuthorizeView(QMainWindow):
         self._model.user_authorized.connect(self.on_authorize_result)
 
     def init_data(self):
-        self._ui.login_edit.setText("Ivanov@namecomp.ru")
-        self._ui.pass_edit.setText("2L6KZG")
+        self._ui.login_edit.setText("fedorov@namecomp.ru")
+        self._ui.pass_edit.setText("8ntwUp")
+
+    def show_error(self, text):
+        msg_box = QMessageBox()
+        msg_box.setText(text)
+        msg_box.setIcon(QMessageBox.Critical)
+        msg_box.setWindowTitle("Ошибка авторизации")
+        msg_box.exec()
 
     @pyqtSlot(int)
-    def on_show_pass_changed(self, isChecked):
-        mode = QLineEdit.Normal if isChecked else QLineEdit.Password
+    def on_show_pass_changed(self, is_checked):
+        mode = QLineEdit.Normal if is_checked else QLineEdit.Password
         self._ui.pass_edit.setEchoMode(mode)
 
     @pyqtSlot()

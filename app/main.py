@@ -11,8 +11,7 @@ class App(QApplication):
         super(App, self).__init__(sys_argv)
 
         self.model = AuthorizeModel()
-        self.controller = AuthorizeController(self.model)
-        self.view = AuthorizeView(self.model, self.controller)
+        self.view = AuthorizeView(self.model)
         self.view.show()
 
 

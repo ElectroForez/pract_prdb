@@ -41,7 +41,6 @@ class AuthorizeModel(QObject):
                              input_type,
                              time
                          ))
-        print('Добавлено в историю')
 
     @property
     def try_auth(self):
@@ -49,7 +48,6 @@ class AuthorizeModel(QObject):
 
     @try_auth.setter
     def try_auth(self, value):
-        print(value)
         self._try_auth = value
-        if self._try_auth > 1:
+        if self._try_auth >= 4:
             self.block_auth.emit()

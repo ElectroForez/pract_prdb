@@ -12,7 +12,6 @@ class AuthorizeController(QObject):
 
     @pyqtSlot(str, str)
     def authorize(self, login, password):
-        self._model.try_auth += 1
         candidate = self._model.verify_credentials(login, password)
         if candidate:
             model = PersonalAccountModel(candidate)
@@ -21,3 +20,4 @@ class AuthorizeController(QObject):
             self._view.close()
         else:
             self._view.show_error("Неверный логин или пароль")
+            self._model.try_auth += 1

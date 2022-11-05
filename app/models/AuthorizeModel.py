@@ -8,11 +8,14 @@ from models.Db import db
 class AuthorizeModel(QObject):
 
     user_authorized = pyqtSignal(bool)
+    block_auth = pyqtSignal()
 
     def __init__(self):
         super().__init__()
         self._user_model = UserModel()
         self._cur_user = None
+        self._try_auth = 0
+        print('init model')
 
     @property
     def cur_user(self):
@@ -20,7 +23,7 @@ class AuthorizeModel(QObject):
 
     @cur_user.setter
     def cur_user(self, value):
-        return self._cur_user
+        self._cur_user = value
 
     def verify_credentials(self, login, password):
         candidate = self._user_model.get_user(login, password)
@@ -39,3 +42,14 @@ class AuthorizeModel(QObject):
                              time
                          ))
         print('Добавлено в историю')
+
+    @property
+    def try_auth(self):
+        return self._try_auth
+
+    @try_auth.setter
+    def try_auth(self, value):
+        print(value)
+        self._try_auth = value
+        if self._try_auth > 1:
+            self.block_auth.emit()

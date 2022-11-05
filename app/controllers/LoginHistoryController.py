@@ -7,3 +7,7 @@ class LoginHistoryController(QObject):
 
         self._model = model
         self._view = view
+
+    @pyqtSlot(str)
+    def filter_by_login(self, value):
+        self._model.history = self._model.get_history_by_login(value)

@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, QTimer
 from PyQt5.QtWidgets import QMainWindow, QLineEdit, QMessageBox
 from views.authorizeDesign import Ui_MainWindow
 
@@ -22,6 +22,7 @@ class AuthorizeView(QMainWindow):
         self._ui.show_pass_box.stateChanged.connect(self.on_show_pass_changed)
         self._ui.auth_button.clicked.connect(self.on_authorize_click)
         self._model.user_authorized.connect(self.on_authorize_result)
+        self._model.block_auth.connect(self.on_block_auth)
 
     def init_data(self):
         self._ui.login_edit.setText("fedorov@namecomp.ru")
@@ -48,3 +49,12 @@ class AuthorizeView(QMainWindow):
     @pyqtSlot(bool)
     def on_authorize_result(self, value):
         print(value)
+
+    @pyqtSlot()
+    def on_block_auth(self):
+        timer = QTimer
+        self._ui.auth_button.setDisabled(True)
+        timer.singleShot(10000, self.block_auth)
+
+    def block_auth(self):
+        self._ui.auth_button.setDisabled(False)

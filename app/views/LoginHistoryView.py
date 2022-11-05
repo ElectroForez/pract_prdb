@@ -7,7 +7,6 @@ from views.loginHistoryDesign import Ui_Form
 from controllers.LoginHistoryController import LoginHistoryController
 
 
-
 class LoginHistoryView(QWidget):
 
     def __init__(self, model):
@@ -19,15 +18,20 @@ class LoginHistoryView(QWidget):
 
         self._ui.setupUi(self)
         self.init_slots()
-        self.init_data()
+
+        self.draw_history()
 
     def init_slots(self):
-        pass
+        self._model.history_changed.connect(self.on_change_history)
+        self._ui.filter_edit.textChanged\
+            .connect(lambda: self._controller.filter_by_login(self._ui.filter_edit.text()))
 
-    def init_data(self):
-        table = self._ui.history_table
+    def draw_history(self):
         history = self._model.history
-
+        print(history)
+        table = self._ui.history_table
+        table.clear()
+        table.clearContents()
         table.setColumnCount(len(history[0]))
         table.setRowCount(len(history))
         table.setHorizontalHeaderLabels(history[0].keys())
@@ -38,4 +42,7 @@ class LoginHistoryView(QWidget):
                 table.setItem(i, j, QTableWidgetItem(str(value)))
         table.resizeColumnsToContents()
         table.setSortingEnabled(True)
-        pass
+
+    @pyqtSlot()
+    def on_change_history(self):
+        self.draw_history()

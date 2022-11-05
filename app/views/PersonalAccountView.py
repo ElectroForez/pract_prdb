@@ -22,6 +22,7 @@ class PersonalAccountView(QMainWindow):
 
     def init_slots(self):
         self._ui.see_history.clicked.connect(self._controller.open_history)
+        self._ui.create_order_btn.clicked.connect(self._controller.create_order)
 
     def init_data(self):
         fio = self._model.user['ФИО ']

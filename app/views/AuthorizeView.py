@@ -54,7 +54,7 @@ class AuthorizeView(QMainWindow):
     def on_block_auth(self):
         timer = QTimer
         self._ui.auth_button.setDisabled(True)
-        timer.singleShot(10000, self.block_auth)
+        timer.singleShot(10000, self.after_block_auth)
 
         msg_box = QMessageBox()
         msg_box.setText("Слишком много неправильных попыток. Подождите 10 секунд")
@@ -62,5 +62,5 @@ class AuthorizeView(QMainWindow):
         msg_box.setWindowTitle("СТОЙ! СТРЕЛЯТЬ БУДУ!")
         msg_box.exec()
 
-    def block_auth(self):
+    def after_block_auth(self):
         self._ui.auth_button.setDisabled(False)

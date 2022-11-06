@@ -27,7 +27,7 @@ class Ui_Form(object):
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.order_id_edit = QtWidgets.QLineEdit(Form)
-        self.order_id_edit.setObjectName("order_num_edit")
+        self.order_id_edit.setObjectName("order_id_edit")
         self.horizontalLayout.addWidget(self.order_id_edit)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.info_label = QtWidgets.QLabel(Form)
@@ -50,3 +50,4 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Новый заказ"))
         self.label.setText(_translate("Form", "Номер заказа"))
         self.create_order_btn.setText(_translate("Form", "Сформировать заказ"))
+        self.create_order_btn.setShortcut(_translate("Form", "Return"))

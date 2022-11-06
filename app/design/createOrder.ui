@@ -74,6 +74,9 @@
      <property name="text">
       <string>Сформировать заказ</string>
      </property>
+     <property name="shortcut">
+      <string>Return</string>
+     </property>
     </widget>
    </item>
    <item>

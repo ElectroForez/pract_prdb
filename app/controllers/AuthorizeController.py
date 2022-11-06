@@ -3,6 +3,7 @@ from PyQt5.QtCore import QObject, pyqtSlot
 from models.PersonalAccountModel import PersonalAccountModel
 from views.PersonalAccountView import PersonalAccountView
 
+
 class AuthorizeController(QObject):
     def __init__(self, view, model):
         super().__init__()

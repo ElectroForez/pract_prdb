@@ -1,10 +1,10 @@
-from models.Db import Db
+from models.Db import db
 
 
 class UserModel:
     def __init__(self):
         super().__init__()
-        self.db = Db()
+        self.db = db
         self.get_users()
 
     @property

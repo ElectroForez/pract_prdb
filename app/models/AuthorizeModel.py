@@ -5,6 +5,7 @@ from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 from models.User import UserModel
 from models.Db import db
 
+
 class AuthorizeModel(QObject):
 
     user_authorized = pyqtSignal(bool)
@@ -15,7 +16,6 @@ class AuthorizeModel(QObject):
         self._user_model = UserModel()
         self._cur_user = None
         self._try_auth = 0
-        print('init model')
 
     @property
     def cur_user(self):

@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtCore import QObject, pyqtSlot, Qt
 
 from models.CreateOrderModel import CreateOrderModel
 from models.LoginHistoryModel import LoginHistoryModel
@@ -16,11 +16,11 @@ class PersonalAccountController(QObject):
     @pyqtSlot()
     def open_history(self):
         model = LoginHistoryModel()
-        view = LoginHistoryView(model)
+        view = LoginHistoryView(model, self._view)
         view.show()
 
     @pyqtSlot()
     def create_order(self):
         model = CreateOrderModel()
-        view = CreateOrderView(model)
+        view = CreateOrderView(model, self._view)
         view.show()

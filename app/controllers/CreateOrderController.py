@@ -2,6 +2,7 @@ from PyQt5.QtCore import QObject, pyqtSlot
 
 from models.CreateOrderModel import CreateOrderModel
 
+
 class CreateOrderController(QObject):
     def __init__(self, view, model: CreateOrderModel):
         super().__init__()

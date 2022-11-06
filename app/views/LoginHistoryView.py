@@ -9,13 +9,14 @@ from controllers.LoginHistoryController import LoginHistoryController
 
 class LoginHistoryView(QWidget):
 
-    def __init__(self, model):
-        super().__init__()
+    def __init__(self, model, parent=None):
+        super().__init__(parent)
 
         self._model = model
         self._controller = LoginHistoryController(self, self._model)
         self._ui = Ui_Form()
 
+        self.setWindowFlags(Qt.Window)
         self._ui.setupUi(self)
         self.init_slots()
 
@@ -28,10 +29,10 @@ class LoginHistoryView(QWidget):
 
     def draw_history(self):
         history = self._model.history
-        print(history)
         table = self._ui.history_table
-        table.clear()
         table.clearContents()
+        if not len(history):
+            return
         table.setColumnCount(len(history[0]))
         table.setRowCount(len(history))
         table.setHorizontalHeaderLabels(history[0].keys())

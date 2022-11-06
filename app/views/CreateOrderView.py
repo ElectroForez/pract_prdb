@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSlot, QRegExp
+from PyQt5.QtCore import pyqtSlot, QRegExp, Qt
 from PyQt5.QtGui import QPixmap, QRegExpValidator
 from PyQt5.QtWidgets import QMainWindow, QLineEdit, QPushButton, QWidget, QMessageBox
 
@@ -11,12 +11,13 @@ from controllers.CreateOrderController import CreateOrderController
 
 class CreateOrderView(QWidget):
 
-    def __init__(self, model: CreateOrderModel):
-        super().__init__()
+    def __init__(self, model: CreateOrderModel, parent=None):
+        super().__init__(parent)
 
         self._model = model
         self._controller = CreateOrderController(self, self._model)
         self._ui = Ui_Form()
+        self.setWindowFlags(Qt.Window)
 
         self._ui.setupUi(self)
         self.init_slots()
@@ -31,7 +32,7 @@ class CreateOrderView(QWidget):
         self._model.order_empty.connect(self.on_order_empty)
 
     def init_data(self):
-        stu_id_regx = QRegExp('^[0-9]+$')
+        stu_id_regx = QRegExp('^[0-9]{14}$')
         stu_id_validator = QRegExpValidator(stu_id_regx, self._ui.order_id_edit)
         self._ui.order_id_edit.setValidator(stu_id_validator)
         self._ui.order_id_edit.setText(str(self._model.cur_order))

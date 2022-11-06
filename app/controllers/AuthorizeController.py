@@ -14,6 +14,10 @@ class AuthorizeController(QObject):
 
     @pyqtSlot(str, str)
     def authorize(self, login, password):
+        if not (login and password):
+            self._view.show_error("Заполните все поля")
+            return
+
         candidate = self._model.verify_credentials(login, password)
         if candidate:
             model = PersonalAccountModel(candidate)

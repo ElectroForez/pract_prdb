@@ -18,5 +18,7 @@ class CapchaDialogController(QObject):
         if self._model.capcha != value:
             self._view.show_error()
             self._view._parent.on_block_auth()
+        else:
+            self._view._parent.on_good_capcha()
         self._view.close()
 

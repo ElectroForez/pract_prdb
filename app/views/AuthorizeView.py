@@ -25,7 +25,7 @@ class AuthorizeView(QMainWindow):
         self._model.block_auth.connect(self._controller.create_capcha)
 
     def init_data(self):
-        self._ui.login_edit.setText("fedorov@namecomp.r")
+        self._ui.login_edit.setText("fedorov@namecomp.ru")
         self._ui.pass_edit.setText("8ntwUp")
 
     def show_error(self, text):
@@ -57,6 +57,9 @@ class AuthorizeView(QMainWindow):
         timer = QTimer
         self._ui.auth_button.setDisabled(True)
         timer.singleShot(10000, self.after_block_auth)
+
+    def on_good_capcha(self):
+        self._ui.auth_button.setDisabled(False)
 
     def after_block_auth(self):
         self._ui.auth_button.setDisabled(False)

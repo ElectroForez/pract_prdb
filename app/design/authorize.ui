@@ -19,25 +19,39 @@
   <property name="windowTitle">
    <string>Авторизация</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../res/Вариант 9/Общие ресурсы/logo_1.ico</normaloff>../../res/Вариант 9/Общие ресурсы/logo_1.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::MarkdownText</enum>
+          </property>
+          <property name="pixmap">
+           <pixmap>../../res/Вариант 9/Общие ресурсы/logo_1.ico</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLabel" name="label">

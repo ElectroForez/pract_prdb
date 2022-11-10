@@ -32,7 +32,7 @@ class CreateOrderView(QWidget):
         self._model.order_empty.connect(self.on_order_empty)
 
     def init_data(self):
-        stu_id_regx = QRegExp('^[0-9]{14}$')
+        stu_id_regx = QRegExp('^[0-9]{10}$')
         stu_id_validator = QRegExpValidator(stu_id_regx, self._ui.order_id_edit)
         self._ui.order_id_edit.setValidator(stu_id_validator)
         self._ui.order_id_edit.setText(str(self._model.cur_order))

@@ -5,7 +5,7 @@ from psycopg2.extras import RealDictCursor
 class Db:
     def __init__(self):
         self.connection = psycopg2.connect(
-            dbname='test',
+            dbname='pract_prdb',
             user='admin',
             password='qwerty',
             host='localhost'
